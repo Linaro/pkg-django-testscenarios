@@ -2,15 +2,16 @@
 Django-compatible testscenarios.TestWithScenarios
 
 It is required to have a special class because of the way
-testscenarios.TestCase is implemented. It's using
-testtools.clone_test_with_new_id() that calls copy.deepcopy() of the
-initialized test case object. Unfortunately django's TestCase instances
-have a client (django.test.Client) that uses cStringIO which cannot be
+testscenarios.TestCase is implemented. It uses
+testtools.clone_test_with_new_id() and this calls copy.deepcopy() on the
+initialized test case object. Unfortunately django's TestCase instances have a
+client (django.test.Client) that references a cStringIO, which cannot be
 copied.
 
 To work around the problem we implement a custom __deepcopy__ (ideally
 this would be upstream in django.test.TestCase) that re-instantiates the
-test Client() as a way of copying it's pristine state.
+a fresh test Client() instead of copying its state. This works because
+deepcopy is called before any test code is run.
 """
 
 import copy
