@@ -1,3 +1,9 @@
+django-testscenarios (0.1-1ubuntu1) maverick; urgency=low
+
+  * First upstream release 
+
+ -- Zygmunt Krynicki <zygmunt.krynicki@linaro.org>  Mon, 22 Nov 2010 11:05:33 +0100
+
 django-testscenarios (0.1-1) maverick; urgency=low
 
   * source package automatically created by stdeb 0.6.0
