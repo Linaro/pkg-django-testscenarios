@@ -25,7 +25,7 @@ setup(
     version = "0.1",
     author = "Zygmunt Krynicki",
     author_email = "zygmunt.krynicki@linaro.org",
-    py_modules = ['django_testscenarios'],
+    packages = ['django_testscenarios'],
     description = "Django-compatible testscenarios.TestWithScenarios",
     url = 'https://launchpad.net/django-testscenarios',
     classifiers = [
