@@ -1,65 +1,93 @@
+# Copyright (C) 2010 Linaro Limited
+#
+# Author: Zygmunt Krynicki <zygmunt.krynicki@linaro.org>
+#
+# This file is part of django-testscenarios.
+#
+# django-testscenarios is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License version 3
+# as published by the Free Software Foundation
+#
+# django-testscenarios is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with django-testscenarios.  If not, see <http://www.gnu.org/licenses/>.
+
 """
-Django-compatible testscenarios.TestWithScenarios
+An uber-test class for Django that mixes:
+ * testtools.TestCase
+ * testscenarios.TestWithScenarios
+with django.test.TestCase or TransactionTestCase
 
-It is required to have a special class because of the way
-testscenarios.TestCase is implemented. It uses
-testtools.clone_test_with_new_id() and this calls copy.deepcopy() on the
-initialized test case object. Unfortunately django's TestCase instances have a
-client (django.test.Client) that references a cStringIO, which cannot be
-copied.
-
-To work around the problem we implement a custom __deepcopy__ (ideally
-this would be upstream in django.test.TestCase) that re-instantiates the
-a fresh test Client() instead of copying its state. This works because
-deepcopy is called before any test code is run.
+This module contains two base classes for django aware unit testing with
+scenario support. They change the way __call__ and run() are implemented
+to let each test case generated for a scenario participate in django
+database setup mechanics.
 """
 
-import copy
 import django.test
+import testtools
 import testscenarios
 
 
-class _EmptyNewStyleClass(object):
-    """
-    Empty new-style class similar to copy._EmptyClass
-    """
-
-
-class _ScenarioMixIn(object):
-
-    def __deepcopy__(self, memo):
-        self_copy = _EmptyNewStyleClass()
-        self_copy.__class__ = self.__class__
-        for attr in self.__dict__:
-            value = getattr(self, attr)
-            if isinstance(value, django.test.Client):
-                value_copy = django.test.Client()
-            else:
-                value_copy = copy.deepcopy(value, memo)
-            setattr(self_copy, attr, value_copy)
-        return self_copy
-
-    def __str__(self):
-        """
-        Override unitest.TestCase.__str__ to print the ID (that now
-        contains the scenario name).
-        """
-        return self.id()
-
-
 class TestCaseWithScenarios(
-    _ScenarioMixIn,
+    testtools.TestCase,
     testscenarios.TestWithScenarios,
     django.test.TestCase):
     """
     Django TestCase with scenario support
     """
 
+    def __call__(self, result=None):
+        """
+        Wrapper around default __call__ method to perform common Django test
+        set up. This means that user-defined Test Cases aren't required to
+        include a call to super().setUp().
+
+        This wrapper is made scenario-aware
+        """
+        scenarios = self._get_scenarios()
+        if scenarios:
+            # Note, we call our implementation of run() to create
+            # scenarios and give each a chance to initialize.
+            self.run(result)
+        else:
+            # Without scenarios we just call the django __call__ version
+            # to let it initialize the test database
+            return django.test.TransactionTestCase.__call__(self, result)
+
+    def run(self, result=None):
+        """
+        Run test case generating additional scenarios if needed
+        """
+        scenarios = self._get_scenarios()
+        if scenarios:
+            for test in testscenarios.scenarios.generate_scenarios(self):
+                # Note, we call __call__ on the test case instance to
+                # give django's TestCase __call__ a chance to run.  The
+                # code there will actually setup all the database
+                # mechanics. If we would simply call run here it'd loop
+                # back to our implementation instead which would go to
+                # the else caluse and call django's TestCase.run(). The
+                # problem with this code is that it depends on __call__
+                # being called earlier. This normally happens when the
+                # test framework calls into the test (the very first
+                # call to a unittest.TestCase subclass is __call__, not
+                # __run__.
+                test.__call__(result)
+            return
+        else:
+            return super(TestCaseWithScenarios, self).run(result)
+
 
 class TransactionTestCaseWithScenarios(
-    _ScenarioMixIn,
-    testscenarios.TestWithScenarios,
+    TestCaseWithScenarios,
     django.test.TransactionTestCase):
     """
     Django TransactionTestCase with scenario support
     """
+
+__all__ = ["TestCaseWithScenarios", "TransactionTestCaseWithScenarios"]
