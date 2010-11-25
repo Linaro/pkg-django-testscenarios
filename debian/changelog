@@ -1,3 +1,23 @@
+django-testscenarios (0.2-1ubuntu2) maverick; urgency=low
+
+  * Run unit tests on build 
+
+ -- Zygmunt Krynicki <zygmunt.krynicki@linaro.org>  Thu, 25 Nov 2010 00:29:18 +0100
+
+django-testscenarios (0.2-1ubuntu1) maverick; urgency=low
+
+  * New upstream release:
+    - Change way the scnearios are applied to actually work with djago
+      database management code
+    - Use testtools (so all testtools assetion methods are now available)
+    - Fix copyright files and headers
+    - Add more unit tests :-)
+    - Change how project's unit tests are launched (via setup.py)
+  * Add dep-5 compatible copyright file
+  * Add python-testtools and python-testscenarios to depends and build-depends
+
+ -- Zygmunt Krynicki <zygmunt.krynicki@linaro.org>  Mon, 22 Nov 2010 15:01:19 +0100
+
 django-testscenarios (0.1-1ubuntu1) maverick; urgency=low
 
   * First upstream release 
