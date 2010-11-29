@@ -18,13 +18,27 @@
 
 # Test configuration
 
+import django
+
 # Configure to reflect your database engine
-DATABASE_ENGINE = 'sqlite3'
-DATABASE_NAME = 'test.db'
-DATABASE_USER = ''
-DATABASE_PASSWORD = ''
-DATABASE_HOST = ''
-DATABASE_PORT = ''
+if django.VERSION[0:2] >= (1, 2):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'test.db',               # Or path to database file if using sqlite3.
+            'USER': '',                      # Not used with sqlite3.
+            'PASSWORD': '',                  # Not used with sqlite3.
+            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
+    }
+else:
+    DATABASE_ENGINE = 'sqlite3'
+    DATABASE_NAME = 'test.db'
+    DATABASE_USER = ''
+    DATABASE_PASSWORD = ''
+    DATABASE_HOST = ''
+    DATABASE_PORT = ''
 
 # Secret key, don't share it 
 SECRET_KEY = ''
