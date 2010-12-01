@@ -1,3 +1,10 @@
+django-testscenarios (0.2-1ubuntu3) maverick; urgency=low
+
+  * Fix homepage in debian/control 
+  * Fix building debian packages by not commenting out DH_OPTIONS :-) 
+
+ -- Zygmunt Krynicki <zygmunt.krynicki@linaro.org>  Thu, 25 Nov 2010 00:58:59 +0100
+
 django-testscenarios (0.2-1ubuntu2) maverick; urgency=low
 
   * Run unit tests on build 
