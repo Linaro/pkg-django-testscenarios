@@ -67,7 +67,7 @@ class ScenarioAwareTestCaseIdStrReprMixIn(object):
                 self.__class__.__module__,
                 self.__class__.__name__,
                 self._testMethodName,
-                self._testSenarioName
+                self._testScenarioName
             )
 
     def shortDescription(self):
@@ -79,15 +79,6 @@ class ScenarioAwareTestCaseIdStrReprMixIn(object):
         return str(self)
 
 
-class TestCase(
-    ScenarioAwareTestCaseIdStrReprMixIn,
-    testtools.TestCase,
-    django.test.TestCase):
-    """
-    Django TestCase with testtools power.
-    """
-
-
 class TransactionTestCase(
     ScenarioAwareTestCaseIdStrReprMixIn,
     testtools.TestCase,
@@ -97,13 +88,23 @@ class TransactionTestCase(
     """
 
 
-class TestCaseWithScenarios(
+class TestCase(
+    # XXX: Inheritance order is very important!
+    # See comment next to TestCaseWithScenarios
+    django.test.TestCase,
+    TransactionTestCase):
+    """
+    Django TestCase with testtools power.
+    """
+
+
+class TransactionTestCaseWithScenarios(
     ScenarioAwareTestCaseIdStrReprMixIn,
     testtools.TestCase,
     testscenarios.TestWithScenarios,
-    django.test.TestCase):
+    django.test.TransactionTestCase):
     """
-    Django TestCase with testtools power and scenario support.
+    Django TransactionTestCase with testtools power and scenario support.
     """
 
     def __call__(self, result=None):
@@ -134,51 +135,55 @@ class TestCaseWithScenarios(
             # generate_scenarios iterates the list of scenarios in order
             for scenario_info, test in zip(scenarios,
                                            testscenarios.scenarios.generate_scenarios(self)):
-                # Monkey-patch id() back into the cloned test class
-                # This will use our id (which resembles stock TestCase.id()
+                # Monkey-patch id() back into the cloned test class This
+                # will use our id (which resembles stock TestCase.id()
                 # but it will hold extra information about test scenario
                 # that was applied. This is necessary because
-                # testscenarios removes any information about the actual
-                # scenario and hard-codes the id() function to return
-                # something that we cannot control.
+                # generate_scenarios() removes any information about the
+                # actual scenario and hard-codes the id() function to
+                # return something that we cannot control.
                 test._testScenarioName = scenario_info[0]
                 test.id = lambda: self.__class__.id(test)
 
-                # Note, we call __call__ on the test case instance to
-                # give django's TestCase __call__ a chance to run.  The
-                # code there will actually setup all the database
+                # Note, we call __call__() on the test case instance to
+                # give Django.test.TestCase.__call__() a chance to run.
+                # The code there will actually setup all the database
                 # mechanics. If we would simply call run here it'd loop
                 # back to our implementation instead which would go to
-                # the else caluse and call django's TestCase.run(). The
-                # problem with this code is that it depends on __call__
-                # being called earlier. This normally happens when the
-                # test framework calls into the test (the very first
-                # call to a unittest.TestCase subclass is __call__, not
-                # __run__.
+                # the else clause and call
+                # Django.test.TransationTestCase.run(). The problem with
+                # this code is that it depends on __call__ being called
+                # earlier which normally happens when the test framework
+                # calls into the test (the very first call to a
+                # unittest.TestCase subclass is __call__, not run().
                 test.__call__(result)
             return
         else:
-            return super(TestCaseWithScenarios, self).run(result)
+            return super(TransactionTestCaseWithScenarios, self).run(result)
 
 
-class TransactionTestCaseWithScenarios(TestCaseWithScenarios):
+class TestCaseWithScenarios(
+    # XXX: As in Django we mimic important implementation detail.
+    # Inheritance order is important for non-obvious reasons.
+
+    # Django pays attention to base test class (TestCase vs
+    # TransactionTestCase) and _sorts_ tests inside suites to always run
+    # _all_ non-transaction tests before first transaction test. This is
+    # necessary because of the optimisation in implementation of
+    # database cleanup code. Any other ordering will allow each
+    # non-transaction test occurring immediately after a transaction
+    # test to observe past state. This is caused by Django _not_ doing
+    # cleanup _after_ a transaction test case. This works correctly
+    # since (after sorting test cases) subsequent transaction test case
+    # startup code will purge the database before running user code.
+    #  
+    # Hence, our implementation makes the TransactionTestCase the base
+    # class and the plain TestCase derived class.
+    django.test.TestCase,
+    TransactionTestCaseWithScenarios):
     """
-    Django TransactionTestCase with testtools power and scenario support.
+    Django TestCase with testtools power and scenario support.
     """
-
-    def _fixture_setup(self):
-        # We have to call the proper implementation directly since
-        # django.test.TestCase (without scenarios) _also_ has this
-        # method and comes earlier in the inheritance chain's method
-        # resolution order.
-        django.test.TransactionTestCase._fixture_setup(self)
-
-    def _fixture_teardown(self):
-        # We have to call the proper implementation directly since
-        # django.test.TestCase (without scenarios) _also_ has this
-        # method and comes earlier in the inheritance chain's method
-        # resolution order.
-        django.test.TransactionTestCase._fixture_teardown(self)
 
 
 __all__ = [
