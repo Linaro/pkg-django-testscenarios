@@ -1,3 +1,12 @@
+django-testscenarios (0.3-1ubuntu1) maverick; urgency=low
+
+  * New upstream release
+  * Fix transaction handling that would break in certain situations
+  * Fix various id(), str(), repr() methods to work as in unittest.TestCase
+  * Refactor unit tests to cover more ground and be modular
+
+ -- Zygmunt Krynicki <zygmunt.krynicki@linaro.org>  Tue, 07 Dec 2010 23:13:58 +0100
+
 django-testscenarios (0.2-1ubuntu3) maverick; urgency=low
 
   * Fix homepage in debian/control 
