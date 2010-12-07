@@ -29,11 +29,58 @@ database setup mechanics.
 """
 
 import django.test
-import testtools
 import testscenarios
+import testtools
+import unittest
+
+
+class ScenarioAwareTestCaseIdStrReprMixIn(object):
+    """
+    Helper mix-in that makes the id(), str() and repr() methods sensible
+    again. It uses code from unittest.TestCase as starting point and
+    adds the scenario name where appropriate.
+
+    It's needed to undo the changes that testtools and testscenarios
+    make which somewhat collide with django test runner. The code has
+    been tuned to make output match normal django test code.
+    """
+
+    _testScenarioName = None
+
+    def id(self):
+        value = unittest.TestCase.id(self)
+        if self._testScenarioName is not None:
+            value += ' (%s)' % self._testScenarioName
+        return value
+
+    def __str__(self):
+        value = unittest.TestCase.__str__(self)
+        if self._testScenarioName is not None:
+            value += ' (%s)' % self._testScenarioName
+        return value
+
+    def __repr__(self):
+        if self._testScenarioName is not None:
+            return unittest.TestCase.__repr__(self)
+        else:
+            return "<%s.%s testMethod=%s testScenario=%s>" % (
+                self.__class__.__module__,
+                self.__class__.__name__,
+                self._testMethodName,
+                self._testSenarioName
+            )
+
+    def shortDescription(self):
+        # XXX this makes setup.py test and test_project/manage.py test
+        # output consistent but I have not managed to understand why
+        # it's needed. Perhaps something along the way sets
+        # shortDescription() in the non-pure-unittest code path and then
+        # it gets used by TextTestRunner's getDescription() method.
+        return str(self)
 
 
 class TestCase(
+    ScenarioAwareTestCaseIdStrReprMixIn,
     testtools.TestCase,
     django.test.TestCase):
     """
@@ -42,6 +89,7 @@ class TestCase(
 
 
 class TransactionTestCase(
+    ScenarioAwareTestCaseIdStrReprMixIn,
     testtools.TestCase,
     django.test.TransactionTestCase):
     """
@@ -50,6 +98,7 @@ class TransactionTestCase(
 
 
 class TestCaseWithScenarios(
+    ScenarioAwareTestCaseIdStrReprMixIn,
     testtools.TestCase,
     testscenarios.TestWithScenarios,
     django.test.TestCase):
@@ -81,7 +130,20 @@ class TestCaseWithScenarios(
         """
         scenarios = self._get_scenarios()
         if scenarios:
-            for test in testscenarios.scenarios.generate_scenarios(self):
+            # We can get the scenario name like that because
+            # generate_scenarios iterates the list of scenarios in order
+            for scenario_info, test in zip(scenarios,
+                                           testscenarios.scenarios.generate_scenarios(self)):
+                # Monkey-patch id() back into the cloned test class
+                # This will use our id (which resembles stock TestCase.id()
+                # but it will hold extra information about test scenario
+                # that was applied. This is necessary because
+                # testscenarios removes any information about the actual
+                # scenario and hard-codes the id() function to return
+                # something that we cannot control.
+                test._testScenarioName = scenario_info[0]
+                test.id = lambda: self.__class__.id(test)
+
                 # Note, we call __call__ on the test case instance to
                 # give django's TestCase __call__ a chance to run.  The
                 # code there will actually setup all the database
