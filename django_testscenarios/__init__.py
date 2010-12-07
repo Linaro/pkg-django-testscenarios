@@ -67,7 +67,7 @@ class ScenarioAwareTestCaseIdStrReprMixIn(object):
                 self.__class__.__module__,
                 self.__class__.__name__,
                 self._testMethodName,
-                self._testSenarioName
+                self._testScenarioName
             )
 
     def shortDescription(self):
