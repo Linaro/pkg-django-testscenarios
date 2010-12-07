@@ -81,11 +81,13 @@ class TransactionChecks(object):
 
     def test_transaction_handling(self):
         transaction.enter_transaction_management()
+        transaction.managed(True)
         try:
             self._create_object()
             self._commit_and_reload()
             self.assertEqual(self.obj.field, None)
             self.obj.field = "something"
+            self.obj.save()
             self._rollback_and_reload()
             self.assertEqual(self.obj.field, None)
         finally:
