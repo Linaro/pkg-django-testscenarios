@@ -33,12 +33,28 @@ import testtools
 import testscenarios
 
 
+class TestCase(
+    testtools.TestCase,
+    django.test.TestCase):
+    """
+    Django TestCase with testtools power.
+    """
+
+
+class TransactionTestCase(
+    testtools.TestCase,
+    django.test.TransactionTestCase):
+    """
+    Django TransactionTestCase with testtools power.
+    """
+
+
 class TestCaseWithScenarios(
     testtools.TestCase,
     testscenarios.TestWithScenarios,
     django.test.TestCase):
     """
-    Django TestCase with scenario support
+    Django TestCase with testtools power and scenario support.
     """
 
     def __call__(self, result=None):
@@ -83,11 +99,29 @@ class TestCaseWithScenarios(
             return super(TestCaseWithScenarios, self).run(result)
 
 
-class TransactionTestCaseWithScenarios(
-    TestCaseWithScenarios,
-    django.test.TransactionTestCase):
+class TransactionTestCaseWithScenarios(TestCaseWithScenarios):
     """
-    Django TransactionTestCase with scenario support
+    Django TransactionTestCase with testtools power and scenario support.
     """
 
-__all__ = ["TestCaseWithScenarios", "TransactionTestCaseWithScenarios"]
+    def _fixture_setup(self):
+        # We have to call the proper implementation directly since
+        # django.test.TestCase (without scenarios) _also_ has this
+        # method and comes earlier in the inheritance chain's method
+        # resolution order.
+        django.test.TransactionTestCase._fixture_setup(self)
+
+    def _fixture_teardown(self):
+        # We have to call the proper implementation directly since
+        # django.test.TestCase (without scenarios) _also_ has this
+        # method and comes earlier in the inheritance chain's method
+        # resolution order.
+        django.test.TransactionTestCase._fixture_teardown(self)
+
+
+__all__ = [
+    "TestCase",
+    "TestCaseWithScenarios",
+    "TransactionTestCase",
+    "TransactionTestCaseWithScenarios"
+]
