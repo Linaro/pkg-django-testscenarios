@@ -91,6 +91,55 @@ class TransactionChecks(object):
         finally:
             transaction.leave_transaction_management()
 
+# Non-transaction tests
+
+class TestsWorkWithPlainDjangoTestCase(
+    DjangoTestCase,
+    PlainDatabaseChecks):
+    """
+    Test class that is using:
+        * plain database checks
+        * django test case
+    """
+
+
+class TestsWorkWithTestToolsTestCase(
+    TestCase,
+    PlainDatabaseChecks):
+    """
+    Test class that is using:
+        * plain database checks
+        * test tools test case
+    """
+
+
+class TestsWorkWithTestScenariosTestCaseAndNoScenarios(
+    TestCaseWithScenarios,
+    PlainDatabaseChecks):
+    """
+    Test class that is using:
+        * plain database checks
+        * test tools test case
+        * test scenarios test case
+        * no actual scenarios (short-circuited fast path)
+    """
+
+
+class TestsWorkWithTestScenariosTestCaseAndSomeScenarios(
+    TestCaseWithScenarios,
+    ScenarioParametersAreVisibleChecks,
+    PlainDatabaseChecks):
+    """
+    Test class that is using:
+        * database transactions
+        * test tools test case
+        * test scenarios test case
+        * two dummy scenarios so that multiple test cases get generated
+    """
+
+
+# Transaction tests
+
 
 class TransactionsWorkWithPlainDjangoTestCase(
     DjangoTransactionTestCase,
