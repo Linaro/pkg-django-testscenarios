@@ -17,18 +17,6 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with django-testscenarios.  If not, see <http://www.gnu.org/licenses/>.
 
-def find_sources():
-    import os
-    import sys
-    base_path = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)),
-            "..")
-    if os.path.exists(os.path.join(base_path, "django_testscenarios")):
-        sys.path.insert(0, base_path)
-
-
-find_sources()
-
 
 from django.core.management import execute_manager
 try:

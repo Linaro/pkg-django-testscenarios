@@ -40,7 +40,10 @@ setup(
         "Topic :: Software Development :: Testing",
     ],
     zip_safe = True,
-    packages = ['django_testscenarios'],
+    packages = [
+        'django_testproject',
+        'django_testscenarios',
+    ],
     # dependencies
     install_requires=[
         'django >= 1.0',
