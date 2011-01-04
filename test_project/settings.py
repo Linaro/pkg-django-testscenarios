@@ -16,10 +16,13 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with django-testscenarios.  If not, see <http://www.gnu.org/licenses/>.
 
+from django_testproject.settings import gen_settings
 
-from django_testproject.settings import *
 
-
-INSTALLED_APPS += (
-    'django_testscenarios',
+locals().update(
+    gen_settings(
+        INSTALLED_APPS=[
+            'django_testscenarios',
+        ]
+    )
 )
