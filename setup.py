@@ -21,7 +21,7 @@ from setuptools import setup
 
 setup(
     name = 'django-testscenarios',
-    version = "0.5.2",
+    version = "0.5.3",
     author = "Zygmunt Krynicki",
     author_email = "zygmunt.krynicki@linaro.org",
     description = "Django-compatible testscenarios.TestWithScenarios",
