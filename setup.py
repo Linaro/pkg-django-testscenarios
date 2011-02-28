@@ -48,6 +48,6 @@ setup(
     install_requires=[
         'django >= 1.0',
         'testtools >= 0.9.2',
-        'testscenarios >= 0.2',
+        'testscenarios >= 0.1',
     ],
 )
