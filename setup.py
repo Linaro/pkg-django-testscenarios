@@ -20,16 +20,16 @@
 from setuptools import setup
 
 setup(
-    name = 'django-testscenarios',
-    version = "0.5.2",
-    author = "Zygmunt Krynicki",
-    author_email = "zygmunt.krynicki@linaro.org",
-    description = "Django-compatible testscenarios.TestWithScenarios",
-    url = 'https://launchpad.net/django-testscenarios',
-    test_suite = 'test_project.tests.run_tests',
+    name='django-testscenarios',
+    version="0.5.2",
+    author="Zygmunt Krynicki",
+    author_email="zygmunt.krynicki@linaro.org",
+    description="Django-compatible testscenarios.TestWithScenarios",
+    url='https://launchpad.net/django-testscenarios',
+    test_suite='django_testscenarios.test_project.tests.run_tests',
     license='LGPLv3',
-    keywords = ['django', 'testing', 'scenarios'],
-    classifiers = [
+    keywords=['django', 'testing', 'scenarios'],
+    classifiers=[
         "Development Status :: 4 - Beta",
         'Environment :: Web Environment',
         'Framework :: Django',
@@ -39,8 +39,8 @@ setup(
         "Programming Language :: Python :: 2.6",
         "Topic :: Software Development :: Testing",
     ],
-    zip_safe = True,
-    packages = [
+    zip_safe=True,
+    packages=[
         'django_testproject',
         'django_testscenarios',
     ],
@@ -48,6 +48,4 @@ setup(
     install_requires=[
         'django >= 1.0',
         'testtools >= 0.9.2',
-        'testscenarios >= 0.2',
-    ],
-)
+        'testscenarios >= 0.2'])
