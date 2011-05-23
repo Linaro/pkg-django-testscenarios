@@ -1,4 +1,4 @@
-# Copyright (C) 2010 Linaro Limited
+# Copyright (C) 2010, 2011 Linaro Limited
 #
 # Author: Zygmunt Krynicki <zygmunt.krynicki@linaro.org>
 #
@@ -21,15 +21,13 @@ import unittest
 from django.db import models, transaction
 from django.test import (
     TestCase as DjangoTestCase,
-    TransactionTestCase as DjangoTransactionTestCase
-)
+    TransactionTestCase as DjangoTransactionTestCase)
 
-from django_testscenarios import (
+from django_testscenarios.ubertest import (
     TestCase,
     TestCaseWithScenarios,
     TransactionTestCase,
-    TransactionTestCaseWithScenarios,
-)
+    TransactionTestCaseWithScenarios)
 
 
 class TestModel(models.Model):
@@ -95,7 +93,9 @@ class TransactionChecks(object):
         finally:
             transaction.leave_transaction_management()
 
+
 # Non-transaction tests
+
 
 class TestsWorkWithPlainDjangoTestCase(
     DjangoTestCase,

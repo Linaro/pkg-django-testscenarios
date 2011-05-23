@@ -7,6 +7,9 @@ import inspect
 import django
 
 
+DJANGO_TESTPROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+
+
 def _get_default_settings(project_dir):
     """
     Produce default settings
@@ -28,28 +31,27 @@ def _get_default_settings(project_dir):
     SITE_ID = 1
     TEMPLATE_LOADERS = (
         'django.template.loaders.filesystem.load_template_source',
-        'django.template.loaders.app_directories.load_template_source',
-    )
+        'django.template.loaders.app_directories.load_template_source',)
     TEMPLATE_DIRS = (
-        os.path.join(project_dir, "templates")
-    )
+        os.path.join(project_dir, "templates"),
+        os.path.join(DJANGO_TESTPROJECT_DIR, "templates"))
     MIDDLEWARE_CLASSES = (
         'django.middleware.common.CommonMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.middleware.transaction.TransactionMiddleware',
-    )
+        'django.middleware.transaction.TransactionMiddleware',)
     if django.VERSION[0:2] >= (1, 2):
         DATABASES = {
             'default': {
-                'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-                'NAME': os.path.join(project_dir, 'test.db'),               # Or path to database file if using sqlite3.
-                'USER': '',                      # Not used with sqlite3.
-                'PASSWORD': '',                  # Not used with sqlite3.
-                'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-                'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-            }
-        }
+                # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+                'ENGINE': 'django.db.backends.sqlite3',
+                # Or path to database file if using sqlite3.
+                'NAME': os.path.join(project_dir, 'test.db'),
+                'USER': '',  # Not used with sqlite3.
+                'PASSWORD': '',  # Not used with sqlite3.
+                'HOST': '',  # Set to empty string for localhost. Not used with sqlite3.
+                'PORT': '',  # Set to empty string for default. Not used with sqlite3.
+            }}
     else:
         DATABASE_ENGINE = 'sqlite3'
         DATABASE_NAME = os.path.join(project_dir, 'test.db')

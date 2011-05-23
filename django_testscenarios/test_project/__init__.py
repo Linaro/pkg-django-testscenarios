@@ -1,4 +1,4 @@
-# Copyright (C) 2010 Linaro Limited
+# Copyright (C) 2010, 2011 Linaro Limited
 #
 # Author: Zygmunt Krynicki <zygmunt.krynicki@linaro.org>
 #
@@ -15,14 +15,3 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with django-testscenarios.  If not, see <http://www.gnu.org/licenses/>.
-
-from django_testproject.settings import gen_settings
-
-
-locals().update(
-    gen_settings(
-        INSTALLED_APPS=[
-            'django_testscenarios',
-        ]
-    )
-)

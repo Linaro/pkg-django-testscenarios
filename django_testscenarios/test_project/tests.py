@@ -1,4 +1,4 @@
-# Copyright (C) 2010 Linaro Limited
+# Copyright (C) 2010, 2011 Linaro Limited
 #
 # Author: Zygmunt Krynicki <zygmunt.krynicki@linaro.org>
 #
@@ -17,7 +17,11 @@
 # along with django-testscenarios.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from django_testproject.tests import run_tests
+from django_testproject.tests import run_tests_for
+
+
+def run_tests():
+    return run_tests_for("django_testscenarios.test_project.settings")
 
 
 if __name__ == '__main__':
