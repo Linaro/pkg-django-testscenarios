@@ -36,13 +36,17 @@ def run_tests_for(settings_module_name, test_last_n_apps=-1):
     django.contrib.auth gazillion times just because you use it in your
     application) run_tests allows you to run just a subset of applications. By
     default last item in INSTALLED_APPLICATIONS is tested. You can change it by
-    calling run_tests() with different argument.
+    calling run_tests() with different argument. If you really want to test all
+    applications just pass None as test_last_n_apps.
     """
     os.environ['DJANGO_SETTINGS_MODULE'] = settings_module_name
 
     from django.conf import settings
     from django.test.utils import get_runner
-    test_labels = settings.INSTALLED_APPS[test_last_n_apps:]
+    if test_last_n_apps is None:
+        test_labels = settings.INSTALLED_APPS[:]
+    else:
+        test_labels = settings.INSTALLED_APPS[test_last_n_apps:]
     if django.VERSION[0:2] <= (1, 1):
         # Prior to django 1.2 the runner was a plain function
         runner_fn = get_runner(settings)
