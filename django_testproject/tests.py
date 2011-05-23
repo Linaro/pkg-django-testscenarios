@@ -44,7 +44,7 @@ def run_tests_for(settings_module_name, test_last_n_apps=-1):
     from django.conf import settings
     from django.test.utils import get_runner
     if test_last_n_apps is None:
-        test_labels = settings.INSTALLED_APPS[:]
+        test_labels = None
     else:
         test_labels = settings.INSTALLED_APPS[test_last_n_apps:]
     if django.VERSION[0:2] <= (1, 1):
