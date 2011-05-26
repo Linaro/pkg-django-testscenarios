@@ -1,3 +1,2 @@
 include COPYING 
-graft test_project 
-global-exclude *.pyc
+recursive-include django_testproject/templates *.html
