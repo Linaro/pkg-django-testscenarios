@@ -21,7 +21,7 @@ from setuptools import setup
 
 setup(
     name='django-testscenarios',
-    version="0.6.1",
+    version="0.7",
     author="Zygmunt Krynicki",
     author_email="zygmunt.krynicki@linaro.org",
     description="Django-compatible testscenarios.TestWithScenarios",
@@ -41,11 +41,11 @@ setup(
     ],
     zip_safe=True,
     packages=[
-        'django_testproject',
         'django_testscenarios',
     ],
     install_requires=[
         'django >= 1.0',
+        'django-testproject >= 0.1',
         'testtools >= 0.9.2',
         'testscenarios >= 0.1'],
-    include_package_data=True)
+)
