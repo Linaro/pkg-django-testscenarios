@@ -19,12 +19,21 @@
 
 from setuptools import setup
 
+try:
+    import versiontools
+except ImportError:
+    print "This package requires python-versiontools to be configured"
+    print "See: http://packages.python.org/versiontools/installation.html"
+    raise
+
+import django_testscenarios
+
 setup(
     name='django-testscenarios',
-    version="0.7",
+    version=versiontools.format_version(django_testscenarios.__version__),
     author="Zygmunt Krynicki",
     author_email="zygmunt.krynicki@linaro.org",
-    description="Django-compatible testscenarios.TestWithScenarios",
+    description="Test scenarios for Django",
     url='https://launchpad.net/django-testscenarios',
     test_suite='django_testscenarios.test_project.tests.run_tests',
     license='LGPLv3',
@@ -45,7 +54,11 @@ setup(
     ],
     install_requires=[
         'django >= 1.0',
-        'django-testproject >= 0.1',
+        'django-testproject >= 0.1.dev',
         'testtools >= 0.9.2',
-        'testscenarios >= 0.1'],
+        'testscenarios >= 0.1',
+    ],
+    setup_requires = [
+        'versiontools >= 1.1',
+    ],
 )

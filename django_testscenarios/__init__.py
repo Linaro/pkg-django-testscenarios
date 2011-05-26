@@ -15,3 +15,9 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with django-testscenarios.  If not, see <http://www.gnu.org/licenses/>.
+
+"""
+Test scenarios for Django
+"""
+
+__version__ = (0, 7, 0, "dev", 0)
