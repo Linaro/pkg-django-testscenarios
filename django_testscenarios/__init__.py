@@ -20,4 +20,4 @@
 Test scenarios for Django
 """
 
-__version__ = (0, 7, 0, "dev", 0)
+__version__ = (0, 7, 0, "final", 0)
