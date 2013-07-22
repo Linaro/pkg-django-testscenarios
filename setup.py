@@ -43,6 +43,7 @@ setup(
     zip_safe=True,
     packages=[
         'django_testscenarios',
+        'django_testscenarios/test_project',
     ],
     install_requires=[
         'django >= 1.0',

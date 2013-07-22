@@ -1,2 +1,3 @@
 include COPYING 
+include Makefile
 recursive-include django_testproject/templates *.html
