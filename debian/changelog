@@ -1,5 +1,11 @@
+django-testscenarios (0.7.2-2) unstable; urgency=medium
+
+  * Update control for alioth location.
+
+ -- Neil Williams <codehelp@debian.org>  Thu, 12 Dec 2013 22:18:33 +0000
+
 django-testscenarios (0.7.2-1) unstable; urgency=low
 
-  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+  * Initial packaging
 
  -- Neil Williams <codehelp@debian.org>  Mon, 22 Jul 2013 10:14:55 +0100

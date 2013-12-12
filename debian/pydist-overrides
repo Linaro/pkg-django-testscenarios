@@ -1,0 +1,4 @@
+django python-django; PEP386
+django_testproject django-testproject; PEP386
+testtools python-testtools; PEP386
+testscenarios python-testscenarios; PEP386
