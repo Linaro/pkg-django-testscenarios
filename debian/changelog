@@ -1,3 +1,10 @@
+django-testscenarios (0.7.3-1) unstable; urgency=medium
+
+  * Initial release. (Closes: #745440: ITP: django-testscenarios --
+    Django unit test scenarios support)
+
+ -- Neil Williams <codehelp@debian.org>  Tue, 22 Apr 2014 08:10:45 +0100
+
 django-testscenarios (0.7.2-2) unstable; urgency=medium
 
   * Update control for alioth location.

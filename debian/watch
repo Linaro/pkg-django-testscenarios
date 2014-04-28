@@ -1,0 +1,5 @@
+# Compulsory line, this is a version 3 file
+version=3
+
+https://pypi.python.org/packages/source/d/django-testscenarios/django-testscenarios-(\d\.\d\.\d).tar.gz
+

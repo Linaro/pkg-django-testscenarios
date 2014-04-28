@@ -12,6 +12,10 @@
 %:
 	dh $@ --with python2
 
+override_dh_auto_test:
+	# Run the bundled tests when building the package
+	LC_ALL=C python setup.py test
+
 override_dh_auto_install:
 	dh_auto_install
 	python setup.py install --root=$(CURDIR)/debian/django-testscenarios/ --install-layout=deb

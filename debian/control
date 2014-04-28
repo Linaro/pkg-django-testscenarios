@@ -7,16 +7,21 @@ Uploaders: Antonio Terceiro <terceiro@debian.org>,
  Fathi Boudra <fabo@debian.org>, Jordi Mallach <jordi@debian.org>
 Build-Depends: debhelper (>= 8.0.0),
  python | python-all | python-dev | python-all-dev,
- python-versiontools, python-setuptools
+ python-setuptools, python-django, python-testtools,
+ python-mimeparse, python-testscenarios, django-testproject
 X-Python-Version: 2.7
-Standards-Version: 3.9.4
-Homepage: http://www.linaro.org/engineering/validation
-Vcs-Git: https://alioth.debian.org//git/pkg-linaro-lava/django-testscenarios.git
-Vcs-Browser: https://alioth.debian.org/plugins/scmgit/cgi-bin/gitweb.cgi?p=pkg-linaro-lava/django-testscenarios.git;a=summary
+Standards-Version: 3.9.5
+Homepage: http://www.linaro.org/projects/test-validation/
+Vcs-Git: https://github.com/Linaro/pkg-django-testscenarios.git
+Vcs-Browser: https://github.com/Linaro/pkg-django-testscenarios
 
 Package: django-testscenarios
 Architecture: all
 Depends: ${python:Depends}, ${misc:Depends}
-Description: Django test scenarios support
+Description: Django unit test scenarios support
  This package provides django test support for
- LAVA.
+ using testscenarios.TestCase together with
+ django.tests.TestCase. Tests can be given
+ scenarios which all share the django database
+ setup methods.
+
