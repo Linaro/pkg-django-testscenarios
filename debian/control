@@ -10,8 +10,9 @@ Build-Depends: debhelper (>= 8.0.0),
  python-setuptools, python-django, python-testtools,
  python-mimeparse, python-testscenarios, django-testproject
 X-Python-Version: 2.7
+XS-Testsuite: autopkgtest
 Standards-Version: 3.9.5
-Homepage: http://www.linaro.org/projects/test-validation/
+Homepage: http://www.linaro.org/engineering/validation
 Vcs-Git: https://github.com/Linaro/pkg-django-testscenarios.git
 Vcs-Browser: https://github.com/Linaro/pkg-django-testscenarios
 

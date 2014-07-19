@@ -1,3 +1,9 @@
+django-testscenarios (0.7.3-2) unstable; urgency=medium
+
+  * Add autopkgtest support
+
+ -- Neil Williams <codehelp@debian.org>  Sat, 19 Jul 2014 14:13:38 +0100
+
 django-testscenarios (0.7.3-1) unstable; urgency=medium
 
   * Initial release. (Closes: #745440: ITP: django-testscenarios --
