@@ -1,3 +1,11 @@
+django-testscenarios (0.7.4-1) unstable; urgency=medium
+
+  * New upstream release
+  * Test if django supports a setup method and call it where
+    supported for Django 1.7 support. (Closes: #755661)
+
+ -- Neil Williams <codehelp@debian.org>  Tue, 16 Sep 2014 15:49:04 -0700
+
 django-testscenarios (0.7.3-2) unstable; urgency=medium
 
   * Add autopkgtest support
