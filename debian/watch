@@ -1,5 +1,7 @@
 # Compulsory line, this is a version 3 file
 version=3
 
-https://pypi.python.org/packages/source/d/django-testscenarios/django-testscenarios-(\d\.\d\.\d).tar.gz
+# https://pypi.python.org/packages/source/d/django-testscenarios/django-testscenarios-(\d\.\d\.\d).tar.gz
+
+https://git.linaro.org/lava/django-testscenarios.git/tags /lava/django-testscenarios.git/log/refs/tags/(.*)
 

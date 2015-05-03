@@ -5,13 +5,13 @@ Maintainer: Debian LAVA team <pkg-linaro-lava-devel@lists.alioth.debian.org>
 Uploaders: Antonio Terceiro <terceiro@debian.org>,
  Neil Williams <codehelp@debian.org>,
  Fathi Boudra <fabo@debian.org>, Jordi Mallach <jordi@debian.org>
-Build-Depends: debhelper (>= 8.0.0),
+Build-Depends: debhelper (>= 8.0.0), dh-python,
  python | python-all | python-dev | python-all-dev,
  python-setuptools, python-django, python-testtools,
  python-mimeparse, python-testscenarios, django-testproject
 X-Python-Version: 2.7
 XS-Testsuite: autopkgtest
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://www.linaro.org/engineering/validation
 Vcs-Git: https://github.com/Linaro/pkg-django-testscenarios.git
 Vcs-Browser: https://github.com/Linaro/pkg-django-testscenarios

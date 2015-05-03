@@ -1,3 +1,10 @@
+django-testscenarios (0.7.4-2) unstable; urgency=medium
+
+  * Add watch file
+  * Add dh-python to build-deps
+
+ -- Neil Williams <codehelp@debian.org>  Sun, 03 May 2015 17:12:25 +0100
+
 django-testscenarios (0.7.4-1) unstable; urgency=medium
 
   * New upstream release
