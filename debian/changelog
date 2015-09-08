@@ -1,3 +1,9 @@
+django-testscenarios (0.7.4-3) unstable; urgency=medium
+
+  * Add Senthil Kumaran S (stylesen) as an uploader.
+
+ -- Senthil Kumaran S (stylesen) <stylesen@gmail.com>  Tue, 08 Sep 2015 22:32:01 +0530
+
 django-testscenarios (0.7.4-2) unstable; urgency=medium
 
   * Add watch file
