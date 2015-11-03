@@ -1,3 +1,11 @@
+django-testscenarios (0.8-1) unstable; urgency=medium
+
+  * New upstream release. (Closes: #801930)
+    Port the unit test support (only) to atomic
+    transactions. Bump version and django dependency.
+
+ -- Neil Williams <codehelp@debian.org>  Tue, 03 Nov 2015 13:32:26 +0000
+
 django-testscenarios (0.7.4-3) unstable; urgency=medium
 
   * Add Senthil Kumaran S (stylesen) as an uploader.
