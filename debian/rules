@@ -10,15 +10,17 @@
 #export DH_VERBOSE=1
 
 %:
-	dh $@ --with python2
+	dh $@ --with python2,python3
 
 override_dh_auto_test:
 	# Run the bundled tests when building the package
 	LC_ALL=C python setup.py test
+	LC_ALL=C python3 setup.py test
 
 override_dh_auto_install:
 	dh_auto_install
 	python setup.py install --root=$(CURDIR)/debian/django-testscenarios/ --install-layout=deb
+	python3 setup.py install --root=$(CURDIR)/debian/python3-django-testscenarios/ --install-layout=deb
 
 override_dh_auto_clean:
 	dh_auto_clean

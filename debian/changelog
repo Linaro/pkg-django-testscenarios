@@ -1,3 +1,10 @@
+django-testscenarios (0.9-1) unstable; urgency=medium
+
+  * New upstream release for python3 support.
+  * Add python3 package
+
+ -- Neil Williams <codehelp@debian.org>  Wed, 10 Aug 2016 13:33:02 +0100
+
 django-testscenarios (0.8-1) unstable; urgency=medium
 
   * New upstream release. (Closes: #801930)

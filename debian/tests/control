@@ -1,4 +1,4 @@
 Tests: testsuite
-Depends: @builddeps@
+Depends: @builddeps@, python3-django-testscenarios, django-testscenarios
 Restrictions: allow-stderr
 
