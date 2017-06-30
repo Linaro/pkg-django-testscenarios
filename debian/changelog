@@ -1,3 +1,12 @@
+django-testscenarios (0.9-2) unstable; urgency=medium
+
+  * Reduce build-depends to assist with python3 transition
+    (Closes: #866538)
+  * Bump compat and standards version (no changes)
+  * Fix watch file
+
+ -- Neil Williams <codehelp@debian.org>  Fri, 30 Jun 2017 09:40:01 +0100
+
 django-testscenarios (0.9-1) unstable; urgency=medium
 
   * New upstream release for python3 support.
