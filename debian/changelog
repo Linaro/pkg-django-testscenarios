@@ -1,3 +1,11 @@
+django-testscenarios (0.10-1) unstable; urgency=medium
+
+  * New production release for python3 fix.
+  * Remove Fathi and Jordi from uploaders on request.
+    (Closes: #879286)
+
+ -- Neil Williams <codehelp@debian.org>  Mon, 18 Dec 2017 10:46:18 +0000
+
 django-testscenarios (0.9-2) unstable; urgency=medium
 
   * Reduce build-depends to assist with python3 transition
