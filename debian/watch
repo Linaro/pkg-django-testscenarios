@@ -1,7 +1,7 @@
 # Compulsory line, this is a version 3 file
 version=3
 
-# https://pypi.python.org/packages/source/d/django-testscenarios/django-testscenarios-(\d\.\d\.\d).tar.gz
+# https://git.linaro.org/lava/lava-dispatcher.git/snapshot/lava-server-2016.11.tar.gz
 
-https://git.linaro.org/lava/django-testscenarios.git/tags /lava/django-testscenarios.git/log/refs/tags/(.*)
+https://git.linaro.org/lava/django-testscenarios.git/refs /lava/django-testscenarios.git/snapshot/django-testscenarios-(\d+.\d+.\d?)\d*.*.tar.gz
 
