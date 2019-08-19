@@ -2,6 +2,7 @@ django-testscenarios (0.10-2) unstable; urgency=medium
 
   * Team upload.
   * Drop Python 2 support
+  * autopkgtest: remove Python 2 test run
 
  -- Antonio Terceiro <terceiro@debian.org>  Mon, 19 Aug 2019 16:27:11 -0300
 
