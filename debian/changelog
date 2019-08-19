@@ -1,9 +1,9 @@
-django-testscenarios (0.10-2) UNRELEASED; urgency=medium
+django-testscenarios (0.10-2) unstable; urgency=medium
 
   * Team upload.
   * Drop Python 2 support
 
- -- Antonio Terceiro <terceiro@debian.org>  Mon, 19 Aug 2019 15:40:23 -0300
+ -- Antonio Terceiro <terceiro@debian.org>  Mon, 19 Aug 2019 16:27:11 -0300
 
 django-testscenarios (0.10-1~bpo9+1) stretch-backports; urgency=medium
 
