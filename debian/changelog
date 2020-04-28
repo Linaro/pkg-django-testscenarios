@@ -4,6 +4,7 @@ django-testscenarios (0.10-3) UNRELEASED; urgency=medium
   * Use secure URI in Homepage field.
   * Bump debhelper dependency to >= 9, since that's what is used in
     debian/compat.
+  * Bump debhelper from deprecated 9 to 12.
 
  -- Debian Janitor <janitor@jelmer.uk>  Tue, 28 Apr 2020 16:36:40 +0000
 
