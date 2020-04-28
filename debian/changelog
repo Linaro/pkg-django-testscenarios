@@ -1,6 +1,7 @@
 django-testscenarios (0.10-3) UNRELEASED; urgency=medium
 
   * Use secure copyright file specification URI.
+  * Use secure URI in Homepage field.
 
  -- Debian Janitor <janitor@jelmer.uk>  Tue, 28 Apr 2020 16:36:40 +0000
 
