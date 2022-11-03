@@ -1,3 +1,9 @@
+django-testscenarios (0.10-3) UNRELEASED; urgency=medium
+
+  * Use secure copyright file specification URI.
+
+ -- Debian Janitor <janitor@jelmer.uk>  Thu, 03 Nov 2022 05:14:34 -0000
+
 django-testscenarios (0.10-2) unstable; urgency=medium
 
   * Team upload.
