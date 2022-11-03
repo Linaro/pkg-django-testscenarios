@@ -5,6 +5,7 @@ django-testscenarios (0.10-3) UNRELEASED; urgency=medium
   * Bump debhelper dependency to >= 9, since that's what is used in
     debian/compat.
   * Bump debhelper from deprecated 9 to 13.
+  * Set debhelper-compat version in Build-Depends.
 
  -- Debian Janitor <janitor@jelmer.uk>  Thu, 03 Nov 2022 05:14:34 -0000
 
